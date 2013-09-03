@@ -29,7 +29,7 @@ def oauth_callback(request, service):
         ctx.update({"error": "token_missing"})
     else:
         if auth_token:
-            return access.callback(request, access, auth_token)
+            return access.callback.as_view()(request, access, auth_token)
         else:
             # @@@ not nice for OAuth 2
             ctx.update({"error": request.GET.get("error", "token_mismatch")})
